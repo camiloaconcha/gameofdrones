@@ -1,6 +1,7 @@
 import React from "react";
-import "./App.scss";
+import "./App.css";
 import GameBoard from './components/containers/GameBoard'
+import GameStatus from './components/containers/GameStatus'
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       </header>
 
       <GameBoard></GameBoard>
+      <GameStatus></GameStatus>
     </div>
   );
 }
