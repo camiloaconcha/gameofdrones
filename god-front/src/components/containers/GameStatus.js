@@ -16,10 +16,6 @@ class GameStatus extends Component {
     socket.on("message", data => this.setState({ response: data }));
   }
 
-  sendOption() {
-    let name = 'Camilo';
-    socket.emit("add-player", {name});
-  }
 
   render() {
     const { response } = this.state;
@@ -30,7 +26,7 @@ class GameStatus extends Component {
         ) : (
           <p>Loading...</p>
         )}
-        <button onClick={this.sendOption}>Go!</button>
+        <button>Go!</button>
       </div>
     );
   }
