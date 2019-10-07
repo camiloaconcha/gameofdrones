@@ -1,7 +1,7 @@
 const Player = require("../models/player.model");
 
 exports.create = (req, res) => {
-  if (!req.body.content) {
+  if (!req.body.name) {
     return res.status(400).send({
       message: "Player content should have a name"
     });

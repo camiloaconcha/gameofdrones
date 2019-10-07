@@ -4,16 +4,33 @@ const http = require("http");
 const socketio = require("socket.io");
 const port = process.env.PORT || 6200;
 const bodyParser = require("body-parser");
+
+const HOST = "0.0.0.0";
+const morgan = require("morgan");
+const compression = require("compression");
+const mongoose = require("mongoose");
+//Server
+const clientPath = `${__dirname}/../`;
 const players = require("./src/controllers/player.controller");
 const dbConfig = require("./src/config/database.config.js");
-const HOST = "0.0.0.0";
-const morgan = require('morgan');
-const compression = require('compression');
-const mongoose =  require('mongoose');
 
-//Server
 const app = express();
-const clientPath = `${__dirname}/../`;
+const server = http.createServer(app);
+const io = socketio(server);
+
+
+app.use(express.static(clientPath));
+app.use(bodyParser.json());
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+);
+
+app.use(compression());
+app.use(morgan("tiny"));
+
 
 mongoose.Promise = global.Promise;
 mongoose
@@ -29,18 +46,6 @@ mongoose
   });
 
 console.log(`ORIGIN ${clientPath}`);
-
-app.use(express.static(clientPath));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(compression());
-app.use(morgan("tiny"));
-
-require("./src/routes/index")(app);
-
-const server = http.createServer(app);
-const io = socketio(server);
-
 
 
 // Constants
@@ -59,10 +64,6 @@ server.on("error", err => {
   console.error("ERROR", err);
 });
 
-server.listen(port, () => {
-  console.log(`Running on http://${HOST}:${port}`);
-});
-
 io.on("connection", socket => {
   console.log("New client connected"),
     setInterval(() => getApiAndEmit(socket), 1000);
@@ -72,4 +73,9 @@ io.on("connection", socket => {
 io.on("add-player", function(name) {
   players.create(name);
   io.sockets.emit("players", name);
+});
+require("./src/routes/index")(app);
+
+server.listen(port, () => {
+  console.log(`Running on http://${HOST}:${port}`);
 });

@@ -16,6 +16,9 @@ class GameStatus extends Component {
     socket.on("message", data => this.setState({ response: data }));
   }
 
+  sendOption() {
+    this.socket.emit("add-player", "Hey");
+  }
 
   render() {
     const { response } = this.state;
@@ -26,7 +29,7 @@ class GameStatus extends Component {
         ) : (
           <p>Loading...</p>
         )}
-        <button>Go!</button>
+        <button onClick={this.sendOption}></button>
       </div>
     );
   }

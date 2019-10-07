@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const player = mongoose.Schema(
-  {},
+  { name: String },
   {
     timestamps: true
   }
