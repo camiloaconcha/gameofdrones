@@ -17,7 +17,7 @@ const clientPath = `${__dirname}/../`;
 
 mongoose.Promise = global.Promise;
 mongoose
-  .createConnectionc(dbConfig.url, {
+  .createConnection(dbConfig.url, {
     useNewUrlParser: true
   })
   .then(() => {
