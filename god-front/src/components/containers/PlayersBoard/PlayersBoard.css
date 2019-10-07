@@ -1,0 +1,22 @@
+.submit-button {
+  width: 200px;
+  height: 100px;
+  color:white;
+  background-color:#3CAEA3;
+  font-size:25px;
+}
+.name-input {
+  margin: 0;
+  padding: var(--inputPaddingV) var(--inputPaddingH);
+  color: inherit;
+  width: 20%;
+  font-family: inherit;
+  font-size: var(--inputFontSize);
+  font-weight: inherit;
+  line-height: var(--inputLineHeight);
+  border: blue solid 1px;
+  height: 100px;
+  transition: box-shadow var(--transitionDuration);
+  font-size: 20px;
+
+}

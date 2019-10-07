@@ -59,7 +59,7 @@ io.on("connection", sock => {
     gameLoading = null;
   } else {
     gameLoading = sock;
-    gameLoading.emit("message", "Waiting");
+    gameLoading.emit("message", "Waiting ");
   }
 
   sock.on("message", text => {

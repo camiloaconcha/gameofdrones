@@ -16,20 +16,12 @@ class GameStatus extends Component {
     socket.on("message", data => this.setState({ response: data }));
   }
 
-  sendOption() {
-    this.socket.emit("add-player", "Hey");
-  }
 
   render() {
     const { response } = this.state;
     return (
-      <div style={{ textAlign: "center" }}>
-        {response ? (
-          <p>The player {response} Just joined</p>
-        ) : (
-          <p>Loading...</p>
-        )}
-        <button onClick={this.sendOption}></button>
+      <div className="status-container" style={{ textAlign: "center" }}>
+        {response ? <p>Hi! {response}</p> : <p>Loading...</p>}
       </div>
     );
   }

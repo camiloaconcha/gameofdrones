@@ -1,17 +1,12 @@
-import React from 'react';
+import React from "react";
 import "./Button.css";
 
 const Button = props => {
-    return (
-        <div>
-            <button
-                className={['button'+' '+'button-'+props.btnType]}
-                onClick={props.clicked}
-            >
-                {props.children}
-            </button>
-        </div>
-    );
+  return (
+    <button onClick={e => props.onGameItemClick(props.btnType)} className={["button" + " " + "button-" + props.btnType]}>
+      {props.children}
+    </button>
+  );
 };
 
 export default Button;

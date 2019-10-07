@@ -3,16 +3,16 @@ class GameLogic {
     this._players= [player1,player2];
     this._turns= [null,null];
 
-
-    this._notification('Game Starts!');
+    
+    this._sendToPlayers('Game Starts!');
   }
 
-  _sendToPlayer(playerIndex, msg) {
-    this._players[playerIndex].emit('message', msg);
+  _sendToPlayer(playerIndex, message) {
+    this._players[playerIndex].emit('message', message);
   }
 
 
-  _notification(message) {
+  _sendToPlayers(message) {
     this._players.forEach(player => {
       player.emit('message',message);
     });
@@ -38,11 +38,11 @@ class GameLogic {
 
 
   _getGameResult() {
-
+    console.log("GETTING RESULTS")
     const p0 = this._decodeTurn(this._turns[0]);
     const p1 = this._decodeTurn(this._turns[1]);
 
-    const diff = (p1 - p0 + 3) % 3;
+    const distance = (p1 - p0 + 3) % 3;
 
     switch (distance) {
       case 0:
